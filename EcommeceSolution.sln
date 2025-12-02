@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Core", "Ecom.Core\Ecom.Core.csproj", "{78DF4AEB-57BD-46CD-BE7F-E805603B997A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.infrastructure", "Ecom.Infastructure\Ecom.infrastructure.csproj", "{92F03E1A-B117-49FD-B5FD-F29C9C2EA242}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78DF4AEB-57BD-46CD-BE7F-E805603B997A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78DF4AEB-57BD-46CD-BE7F-E805603B997A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78DF4AEB-57BD-46CD-BE7F-E805603B997A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78DF4AEB-57BD-46CD-BE7F-E805603B997A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{92F03E1A-B117-49FD-B5FD-F29C9C2EA242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92F03E1A-B117-49FD-B5FD-F29C9C2EA242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92F03E1A-B117-49FD-B5FD-F29C9C2EA242}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{78DF4AEB-57BD-46CD-BE7F-E805603B997A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{92F03E1A-B117-49FD-B5FD-F29C9C2EA242} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{FC5183A2-F18E-4894-8315-0AF846CC21D4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{9433176E-D9AB-4759-80DF-6C7960895898} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
