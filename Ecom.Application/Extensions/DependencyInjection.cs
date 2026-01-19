@@ -1,4 +1,4 @@
-﻿using Ecom.Application.DTOs;
+﻿using Ecom.Application.Features.Products.Dto;
 using Ecom.Application.Features.Products.Queries.GetAllProducts;
 using Ecom.Application.ValidationBehavior;
 using FluentValidation;
@@ -14,7 +14,7 @@ namespace Ecom.Application.Extensions
             {
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             });
-            services.AddScoped<IRequestHandler<GetAllProductsQuery, ReturnProductDTO>, GetAllProductsHandler>();
+            //services.AddScoped<IRequestHandler<GetAllProductsQuery, ReturnProductDTO>, GetAllProductsHandler>();
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 

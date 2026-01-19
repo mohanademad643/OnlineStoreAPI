@@ -10,6 +10,7 @@ namespace Ecom.Application.Interfaces
         public IPhotoRepository PhotoRepository { get; }
         public ICustomerCartRepository CustomerCartRepository { get; }
         public IAuth AuthRepository { get; }
+        public IUsersRepository usersRepository { get; }
         public IWishListRepository wishListRepository { get; }
     }
 }

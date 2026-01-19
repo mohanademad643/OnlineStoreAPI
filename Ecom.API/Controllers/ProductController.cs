@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Ecom.API.Helper;
-using Ecom.Application.DTOs;
 using Ecom.Application.Features.Products.Commands.CreateProduct;
 using Ecom.Application.Features.Products.Commands.DeleteProduct;
 using Ecom.Application.Features.Products.Commands.UpdateProduct;
+using Ecom.Application.Features.Products.Dto;
 using Ecom.Application.Features.Products.Queries.GetAllProducts;
 using Ecom.Application.Features.Products.Queries.GetProductDetails;
 using Ecom.Application.Interfaces;
@@ -23,7 +23,7 @@ namespace Ecom.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("Get-All-MediatR")]
+        [HttpGet("Get-All-Sorting")]
         public async Task<IActionResult> GetAll([FromQuery] ProductParams productParams)
         {
             
@@ -48,11 +48,11 @@ namespace Ecom.API.Controllers
         //    }
         //}
         [HttpGet("Get-All")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
         {
             try
             {
-                var product = await _unitOfWork.ProductRepository.GetAllAsync(x=>  x.Category, x=> x.Brand,x=>x.Photos);
+                var product = await _unitOfWork.ProductRepository.GetAllAsync(cancellationToken,x=>  x.Category, x=> x.Brand,x=>x.Photos);
 
                 var Result = _mapper.Map<List< ProductDTO>>(product);
 

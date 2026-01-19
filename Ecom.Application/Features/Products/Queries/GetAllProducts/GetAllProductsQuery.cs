@@ -1,4 +1,4 @@
-﻿using Ecom.Application.DTOs;
+﻿using Ecom.Application.Features.Products.Dto;
 using Ecom.Application.Sharing;
 using MediatR;
 

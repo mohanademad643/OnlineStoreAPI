@@ -121,5 +121,7 @@ namespace Ecom.API.Controllers
             var result = await _unitOfWork.AuthRepository.UpdateAddress(email, address);
             return result ? Ok(new ResponseAPI(200)) : BadRequest(new ResponseAPI(400));
         }
+
+       
     }
 }

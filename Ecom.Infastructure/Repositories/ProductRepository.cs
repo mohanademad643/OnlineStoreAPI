@@ -114,7 +114,7 @@ namespace Ecom.infrastructure.Repositories
             await context.SaveChangesAsync();
 
         }
-        public async Task UpdateProduct(Product product)
+        public async Task UpdateAsync(Product product )
         {
             context.Products.Update(product);
             await context.SaveChangesAsync();
@@ -210,5 +210,7 @@ namespace Ecom.infrastructure.Repositories
             context.Photos.RemoveRange(photos);
             await context.SaveChangesAsync();
         }
+
+        
     }
 }

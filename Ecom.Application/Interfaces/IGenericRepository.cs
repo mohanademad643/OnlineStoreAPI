@@ -6,14 +6,14 @@ namespace Ecom.Application.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IReadOnlyList<T>> GetAllAsync();
-        Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
-        Task<T> GetByIdAsync(int id);
-        Task<T> GetByIdAsync(int id ,params Expression<Func<T, object>>[] includes);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(int id);
-        Task<int> CountAsync(); 
+        Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes);
+        Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+        Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes);
+        Task AddAsync(T entity, CancellationToken cancellationToken = default);
+        Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
+        Task DeleteAsync(int id, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(CancellationToken cancellationToken = default); 
     }
 }
 /*

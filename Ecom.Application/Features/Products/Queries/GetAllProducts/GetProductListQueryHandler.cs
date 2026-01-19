@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecom.Application.Common.Filters;
-using Ecom.Application.DTOs;
+using Ecom.Application.Features.Products.Dto;
 using Ecom.Application.Interfaces;
 using MediatR;
 

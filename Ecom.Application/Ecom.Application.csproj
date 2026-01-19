@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Ecom.Domain\Ecom.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Brands\Dto\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ecom.Application.DTOs;
+using Ecom.Application.Features.Products.Dto;
 using Ecom.Application.Interfaces;
 using MediatR;
 
@@ -21,6 +21,7 @@ namespace Ecom.Application.Features.Products.Queries.GetProductDetails
         {
             var product = await _repository.ProductRepository.GetByIdAsync(
                  request.Id,
+                 cancellationToken,
                request.Includes
              );
 

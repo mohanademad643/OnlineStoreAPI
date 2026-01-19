@@ -4,6 +4,7 @@ using Ecom.Core.Entities;
 using Ecom.Domain.Entities;
 using Ecom.Domain.Entities.Order;
 using Ecom.Domain.Entities.Products;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -30,7 +31,19 @@ namespace Ecom.Infastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            SeedRoles(modelBuilder);
         }
+        private void SeedRoles(ModelBuilder builder) {
+
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name="Admin" , ConcurrencyStamp="1" , NormalizedName= "Admin" },
+                new IdentityRole { Name="User" , ConcurrencyStamp="1" , NormalizedName= "User" }
+                );
+
+        
+        
+        }
+
     }
   
 }

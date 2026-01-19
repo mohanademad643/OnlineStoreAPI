@@ -1,5 +1,6 @@
 ﻿
 
+using Ecom.Application.DTO.Adminstration;
 using Ecom.Application.DTOs;
 using Ecom.Domain.Entities;
 
@@ -14,5 +15,8 @@ namespace Ecom.Application.Interfaces
         Task<bool> ActiveAccount(ActiveAccountDTO accountDTO);
         Task<bool> UpdateAddress(string email, Address adress);
         Task<Address> getUserAddress(string email);
+       
+
+
     }
 }

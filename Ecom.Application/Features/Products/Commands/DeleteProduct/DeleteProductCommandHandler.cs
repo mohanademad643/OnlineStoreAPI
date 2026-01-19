@@ -16,8 +16,11 @@ namespace Ecom.Application.Features.Products.Commands.DeleteProduct
         public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             var product = await _repo.ProductRepository.GetByIdAsync(
+
                 request.ProductId,
+                cancellationToken,
                 x => x.Photos
+
             );
 
             if (product == null)

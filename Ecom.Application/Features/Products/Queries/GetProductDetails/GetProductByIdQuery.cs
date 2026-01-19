@@ -1,6 +1,4 @@
-﻿
-
-using Ecom.Application.DTOs;
+﻿using Ecom.Application.Features.Products.Dto;
 using Ecom.Domain.Entities.Products;
 using MediatR;
 using System.Linq.Expressions;

@@ -1,8 +1,7 @@
-﻿
-
+﻿using Ecom.Application.DTOs;
 using Microsoft.AspNetCore.Http;
 
-namespace Ecom.Application.DTOs
+namespace Ecom.Application.Features.Products.Dto
 {
     public record ProductDTO
     {

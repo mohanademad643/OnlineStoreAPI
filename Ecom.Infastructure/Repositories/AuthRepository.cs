@@ -1,4 +1,5 @@
 ﻿
+using Ecom.Application.DTO.Adminstration;
 using Ecom.Application.DTOs;
 using Ecom.Application.Interfaces;
 using Ecom.Application.Sharing;
@@ -15,17 +16,19 @@ namespace Ecom.infrastructure.Repositories
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailService _emailService;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AppDbContext _context;
 
         private readonly IGenerateToken _generateToken;
 
-        public AuthRepository(UserManager<AppUser> userManager, IEmailService emailService, SignInManager<AppUser> signInManager, IGenerateToken generateToken, AppDbContext context)
+        public AuthRepository(UserManager<AppUser> userManager, IEmailService emailService, SignInManager<AppUser> signInManager, IGenerateToken generateToken, AppDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _emailService = emailService;
             _signInManager = signInManager;
             _generateToken = generateToken;
             _context = context;
+            _roleManager = roleManager;
         }
 
         public async Task<string> RegisterAsync(RegisterDTO registerDTO)
@@ -50,6 +53,7 @@ namespace Ecom.infrastructure.Repositories
                 DispalyName = registerDTO.DisplayName,
 
             };
+             await _userManager.AddToRoleAsync(user,"User");
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
 
             if (result.Succeeded is not true)
@@ -59,7 +63,7 @@ namespace Ecom.infrastructure.Repositories
             //send Active Email
             string Token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             await SendEmail(user.Email, Token, "active", "ActiveEmail", "Please Active Your Email clik button to Active");
-
+            await _userManager.AddToRoleAsync(user, "User");
             return "done";
         }
 
@@ -187,6 +191,6 @@ namespace Ecom.infrastructure.Repositories
             return address;
         }
 
-      
+       
     }
 }

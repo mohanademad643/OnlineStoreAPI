@@ -35,12 +35,25 @@ namespace Ecom.infrastructure
             services.AddScoped<IRating, RatingRepository>();
             services.AddScoped<IWishListRepository, WishListRepository>();
             //aplay redis connnection
-            services.AddScoped<IConnectionMultiplexer>(i =>
-            {
-                var Config = ConfigurationOptions.Parse(configuration.GetConnectionString("redis"));
+            //services.AddScoped<IConnectionMultiplexer>(i =>
+            //{
+            //    var Config = ConfigurationOptions.Parse(configuration.GetConnectionString("redis"));
 
-                return ConnectionMultiplexer.Connect(Config);
+            //    return ConnectionMultiplexer.Connect(Config);
+            //});
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var options = ConfigurationOptions.Parse(
+                    configuration.GetConnectionString("redis")
+                );
+
+                options.AbortOnConnectFail = false;
+                options.ConnectRetry = 5;
+                options.ConnectTimeout = 5000;
+
+                return ConnectionMultiplexer.Connect(options);
             });
+
 
             services.AddSingleton<IImageManagementService, ImageManagementService>();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
@@ -57,9 +70,11 @@ namespace Ecom.infrastructure
                 op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 op.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 op.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+               
             }).AddCookie(o =>
             {
                 o.Cookie.Name = "Token";
+                o.Cookie.SameSite = SameSiteMode.None;
                 o.Events.OnRedirectToLogin = context =>
                 {
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;

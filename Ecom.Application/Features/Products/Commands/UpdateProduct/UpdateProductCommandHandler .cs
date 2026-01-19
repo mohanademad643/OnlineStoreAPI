@@ -24,6 +24,7 @@ namespace Ecom.Application.Features.Products.Commands.UpdateProduct
 
             var product = await _repo.ProductRepository.GetByIdAsync(
                 dto.Id,
+                cancellationToken,
                 p => p.Photos,
                 p => p.Category
             );

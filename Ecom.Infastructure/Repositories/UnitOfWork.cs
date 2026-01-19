@@ -17,6 +17,7 @@ namespace Ecom.infrastructure.Repositories
         private readonly IMapper _mapper;
         private readonly IImageManagementService _imageManagementService;
         private readonly UserManager<AppUser> _userManager;
+       private readonly RoleManager<IdentityRole> _roleManager; 
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailService _emailService;
         private readonly IGenerateToken _generateToken;
@@ -31,12 +32,13 @@ namespace Ecom.infrastructure.Repositories
         public IConnectionMultiplexer Redis { get; }
 
         public IAuth AuthRepository { get; }
+        public IUsersRepository usersRepository { get; }
 
         public IWishListRepository wishListRepository { get; }
 
         public UnitOfWork(AppDbContext context, IMapper mapper,
             IImageManagementService imageManagementService,
-            IConnectionMultiplexer redis, UserManager<AppUser> userManager, IEmailService emailService, SignInManager<AppUser> signInManager, IGenerateToken generateToken, IWishListRepository _wishListRepository)
+            IConnectionMultiplexer redis, UserManager<AppUser> userManager, IEmailService emailService, SignInManager<AppUser> signInManager, IGenerateToken generateToken, IWishListRepository _wishListRepository, RoleManager<IdentityRole> roleManager )
 
         {
             _context = context;
@@ -47,13 +49,15 @@ namespace Ecom.infrastructure.Repositories
             _emailService = emailService;
             _signInManager = signInManager;
             _generateToken = generateToken;
+            _roleManager = roleManager;
             CategoryRepository = new CategoryRepository(_context);
             BrandRepository = new BrandRepository(_context);
             ProductRepository = new ProductRepository(_context, _mapper, _imageManagementService);
             PhotoRepository = new PhotoRepository(_context);
             CustomerCartRepository = new CustomerCartRepository(redis);
-            AuthRepository = new AuthRepository(_userManager, _emailService, _signInManager, _generateToken, _context);
-            wishListRepository = new WishListRepository(_context,_mapper);
+            AuthRepository = new AuthRepository(_userManager, _emailService, _signInManager, _generateToken, _context, _roleManager);
+            wishListRepository = new WishListRepository(_context, _mapper);
+            usersRepository = new UsersRepository(_userManager,_roleManager);
         }
     }
 }

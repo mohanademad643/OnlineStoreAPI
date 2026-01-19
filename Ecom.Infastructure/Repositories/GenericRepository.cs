@@ -15,28 +15,28 @@ namespace Ecom.Infastructure.Repositories
             _Context = Context;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
         {
-            await _Context.Set<T>().AddAsync(entity);
-            await _Context.SaveChangesAsync();
+            await _Context.Set<T>().AddAsync(entity,cancellationToken);
+            await _Context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<int> CountAsync()
-        => await _Context.Set<T>().CountAsync();
+        public async Task<int> CountAsync(CancellationToken cancellationToken = default)
+        => await _Context.Set<T>().CountAsync(cancellationToken);
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
         {
-            var entity = await _Context.Set<T>().FindAsync(id);
+            var entity = await _Context.Set<T>().FindAsync(id,cancellationToken);
             _Context.Set<T>().Remove(entity);
 
-             await _Context.SaveChangesAsync();
+             await _Context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
-            => await _Context.Set<T>().AsNoTracking().ToListAsync();
+        public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default)
+            => await _Context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
        
 
-        public  async Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
+        public  async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes)
         {
             var Query = _Context.Set<T>().AsQueryable();
 
@@ -44,16 +44,16 @@ namespace Ecom.Infastructure.Repositories
             {
                 Query = Query.Include(item);
             }
-            return await Query.ToListAsync();
+            return await Query.ToListAsync(cancellationToken);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var entity = await _Context.Set<T>().FindAsync(id);
+            var entity = await _Context.Set<T>().FindAsync(id, cancellationToken);
             return entity;
         }
 
-        public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes)
         {
             var Query = _Context.Set<T>().AsQueryable();
 
@@ -61,15 +61,15 @@ namespace Ecom.Infastructure.Repositories
             {
                 Query = Query.Include(item);
             }
-            var entity = await Query.FirstOrDefaultAsync(x=> EF.Property<int>(x, "Id") == id);
+            var entity = await Query.FirstOrDefaultAsync(x=> EF.Property<int>(x, "Id") == id, cancellationToken);
 
             return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
             _Context.Entry(entity).State = EntityState.Modified;
-            await _Context.SaveChangesAsync();
+            await _Context.SaveChangesAsync(cancellationToken);
         }
     }
 }
